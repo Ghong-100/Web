@@ -1,0 +1,65 @@
+<HTML>
+    <HEAD>
+        <TITLE> 목록 태그 </TITLE>
+    </HEAD>
+    <BODY>
+        <A href="3-1.html">2주차 목록</A><br>
+        여러개의 항목을 오엘 OL 유엘 UL 로 표현함. 글머리기호임.<br>
+        목록은 LI 태그로 추가해주묜 됨.        
+        
+        <H3> OL = Ordered List </H3>
+        <!-- type 속성 : 1,A,a,I,i 가 있음. 
+                        글머리가 설정해둔걸로 진행됨.( ex. 1,2,3,4... A,B,C,D... 이런식으로 )
+             start 속성 : 지정해준 번호부터 시작함.
+        -->
+        <OL type = "I" start="3">과일과일
+            <LI>사과
+            <LI>배
+            <LI>포도
+            <LI>자두
+        </OL>
+
+        <!-- 얘도 type 지정가능한데 네모,동그라미 이런거인듯
+            disc, square, circle 등이 있음.
+         -->
+        <H3> UL = Unordered List </H3>
+        <UL type="square">여행여행
+            <LI>배낭
+            <LI>무전
+            <LI>패키지
+            <LI>크루저
+        </UL>
+
+        <H3> DL 은 뒤에서 더 한다는데? 자료 목록이라니 Data List인감? 타이틀하고 내용을 표현하는건가봄.</H3>
+        <DL>
+            <DT>아이피주소</DT>
+                <DD> 인터넷 주소임.
+            <DT>도메인 주소</DT>
+                <DD> 아이피주소를 문자로
+        </DL>
+
+        <h3> 특수 태그래용 </h3>
+        <PRE>
+            pre도 특수태그는 변환해서 나오는데 XMP태그를 걸면 그냥 다 출력해준다.
+            공백 은 &nbsp;
+            <    는 &lt;
+            >    는 &gt;
+            &    는 &amp;
+            "    는 &quot;
+            tm   은 &trade;
+            c    는 &copy;
+        </PRE>
+        <XMP>
+            pre도 특수태그는 변환해서 나오는데 XMP태그를 걸면 그냥 다 출력해준다.
+            공백 은 &nbsp;
+            <    는 &lt;
+            >    는 &gt;
+            &    는 &amp;
+            "    는 &quot;
+            tm   은 &trade;
+            c    는 &copy;
+        </XMP>
+
+    </BODY>
+
+</HTML>
