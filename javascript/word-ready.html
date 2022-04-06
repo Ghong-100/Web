@@ -1,0 +1,47 @@
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>끝말잇기</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div><span id="order">1</span>번째 참가자</div>
+    <div>제시어 : <span id="word" class="multiTarget"></span>
+        <div class="child"></div>
+    </div>
+    <input type="text">
+    <button class="btn">입력</button>
+
+    <input type="text2">
+    <button class = "btn">벝흩2</button>
+    <button class = "btn multiTarget">벝흩3</button>
+
+    <script>
+        const memberCnt = parseInt(prompt('몇 명이 참가하나요?'), 10);
+
+        // 태그를 통해 받아오는 방법
+        // const $input = document.querySelector('input');
+        // 변수명에 $를 붙인거는 태그를 받아둔 변수라는 표시해둔거임.
+        // const $input = document.querySelectorAll('input');
+        // 이건 노드리스트로 해당 태그 전부 다 받아줌
+
+        // 이건 id로 찾아오는거임 #ID 하믄 됨
+        const $order =  document.querySelector('#order');
+
+        // 이건 Class 로 찾아오는거임  .class 하믄 됨.
+        const $$btns = document.querySelectorAll('.btn');
+        // 이건 button태그중 btn 클래스 받아오는거
+        const $$btns2 = document.querySelectorAll('button.btn');
+        // 이건 다른애들 여러개 받으려고 클래스 잡아둔거 받아오는건데 걍 따로받아서 하는게 나아보임. 지저분해
+        const $$multi = document.querySelectorAll('.multiTarget');
+        // 이건 포함관계인거 찾아주는거 <div>태그 안에 속한<span> 태그를 찾아주는거. 한칸띄는거는 그 안에있다는 뜻
+        const $span = document.querySelector('div span');
+        // 이런식으로 태그안에 있는 클래스를 찾을수도 있는데... 그냥 ID로 구분하는게 깔끔할듯하다
+        const $child = document.querySelector('div .child');
+
+    </script>
+</body>
+</html>
