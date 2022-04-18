@@ -10,16 +10,51 @@
 <body>
     <div><span id="order">1</span>번째 참가자</div>
     <div>제시어 : <span id="word" class="multiTarget"></span>
-        <div class="child"></div>
+        <!-- <div class="child"></div> -->
     </div>
     <input type="text">
     <button class="btn">입력</button>
 
-    <input type="text2">
+    <!-- <input type="text2">
     <button class = "btn">벝흩2</button>
-    <button class = "btn multiTarget">벝흩3</button>
+    <button class = "btn multiTarget">벝흩3</button> -->
 
     <script>
+        const number = Number(prompt('몇 명이 참가하나요?'));
+        const $button = document.querySelector('button');
+        const $input = document.querySelector('input');
+        const $word = document.querySelector('#word');
+        const $order = document.querySelector('#order');
+        let word, newWord;
+
+
+        const onClickButton = () => {
+            if(!word) {
+                word = newWord;
+                $word.textContent = word;
+                $order.textContent = nextOrder();
+            } else {
+                if( word[word.length-1] === newWord[0] ) {
+                    word = newWord;
+                    $word.textContent = word;       // 대부분은 textContent
+                    $order.textContent = nextOrder();
+                    $input.value = '';              // 사용자가 입력하는 애들은 대부분 value
+                    $input.focus();
+                } else {
+                    alert(newWord + ' 이거 아닌뎅...');
+                }
+            }
+        };
+        const onInput = (event) => {
+            newWord = event.target.value;   // event는 이벤트 리스너로 함수가 호출될때 발생한 이벤트에 대한 정보가 들어있다.
+        };
+        const nextOrder = () => {
+            return parseInt($order.textContent)+1>number?1:parseInt($order.textContent)+1;
+        }
+
+        $button.addEventListener('click', onClickButton);
+        $input.addEventListener('input', onInput);
+    /*
         const memberCnt = parseInt(prompt('몇 명이 참가하나요?'), 10);
 
         // 태그를 통해 받아오는 방법
@@ -42,6 +77,25 @@
         // 이런식으로 태그안에 있는 클래스를 찾을수도 있는데... 그냥 ID로 구분하는게 깔끔할듯하다
         const $child = document.querySelector('div .child');
 
+
+        // 마우스 이벤트 리스너
+            // 1. 함수를 람다로 생성 후 넣어주기.
+        const onClickButton = ()=>{
+            console.log('btn clicked');
+        };
+        $$btns[0].addEventListener('click', onClickButton);
+            // 2. 클래식 함수 생성 후 넣기
+        function fnClick() {
+            console.log('btn2 clicked');
+        };
+        $$btns[1].addEventListener('click', fnClick);
+            // 3. 바로 넣어버려
+        //
+        document.querySelector('input').addEventListener('input', (event) => {
+            console.log('글자 입력', event.target.value);
+        });
+
+    */
     </script>
 </body>
 </html>
