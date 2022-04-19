@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쿵쿵따</title>
+    <style>
+        div {
+            width:100%;
+            background-color:#ffdddd;
+            font-family: drfont_daraehand;
+        }
+        #top_title {
+            color:black;
+            font-weight:bold;
+            font-size:4.0vw;
+            align-self:flex-start;
+            vertical-align:80%;
+        }
+        #top_curWord {
+            margin-left: 25%;
+            margin-top: 2%;
+            padding: 10px;
+            width: 30%;
+
+            border-width: 2px;
+            border-style: groove;
+            border-color: coral;
+            display:inline-block;
+        }
+        #stretcher {
+            display: table;
+            width: 100%;
+        }
+        .stretchee {
+            display:table-cell;
+        }
+        .top_curWord_class {
+            color:#010101;
+            font-weight:bold;
+            font-size: 6.0vw;
+            text-align: center;
+        }
+        #char_p1 {
+            color:red;
+        }
+        .images {
+            width: 15vw;
+            height: 15vw;
+            object-fit: cover;
+            background-color:transparent;
+        }
+        #d_input {
+            padding-top: 3vh;
+            align-items: center;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="d_top">
+        <span id="top_title">&nbsp;쿵쿵따</span>
+        <div id="top_curWord">
+            <div id="stretcher">
+                <span class="top_curWord_class stretchee" id="top_curWord_1">다</span>
+                <span class="top_curWord_class stretchee" id="top_curWord_2">ㅡ</span>
+                <span class="top_curWord_class stretchee" id="top_curWord_3">ㅡ</span>
+            </div>
+        </div>
+    </div>
+    <div id="d_chat">
+        <div id="stretcher">
+            <span class="stretchee" id="chat_p1">1</span>
+            <span class="stretchee" id="chat_p2">2</span>
+            <span class="stretchee" id="chat_p3">3</span>
+            <span class="stretchee" id="chat_p4">4</span>
+        </div>
+    </div>
+    <div id="d_char">
+        <div id="stretcher">
+            <span class="stretchee" id="char_p1"><img class="images" src="/res/luffy.png"></span>
+            <span class="stretchee" id="char_p2"><img class="images" src="/res/mario.png"></span>
+            <span class="stretchee" id="char_p3"><img class="images" src="/res/pika.png"></span>
+            <span class="stretchee" id="char_p4"><img class="images" src="/res/sonic.png"></span>
+        </div>
+    </div>
+    <div id="d_input">
+        <input type="text">
+        <button class="btn">입력</button>
+    </div>
+
+    <svg width="0" height="0" viewBox="0 0 400 300">
+        <defs>
+            <mask id="mask">
+            <rect fill="#0000ff" x="0" y="0" width="400" height="300"></rect>
+            </mask>
+        </defs>
+    </svg>
+      
+    <script>
+        var $curWord = document.querySelector('#top_curWord');
+
+    </script>
+</body>
+</html>
