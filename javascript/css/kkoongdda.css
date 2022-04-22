@@ -1,0 +1,93 @@
+/* 전역 설정 */
+div {
+    width:100%;
+    background-color:#ffdddd;
+    font-family: drfont_daraehand;
+}
+#stretcher {
+    display: table;
+    width: 100%;
+    text-align: center;
+}
+.stretchee {
+    display:table-cell;
+}
+.images {
+    width: 15vw;
+    height: 15vw;
+    object-fit: cover;
+    background-color:transparent;
+}
+
+/* Top (게임명, 다음 단어) */
+#top_title {
+    color:black;
+    font-weight:bold;
+    font-size:4.0vw;
+    align-self:flex-start;
+    vertical-align:80%;
+}
+#top_curWord {
+    margin-left: 25%;
+    margin-top: 2%;
+    padding: 10px;
+    width: 30%;
+
+    border-width: 2px;
+    border-style: groove;
+    border-color: coral;
+    display:inline-block;
+}
+.top_curWord_class {
+    color:#010101;
+    font-weight:bold;
+    font-size: 6.0vw;
+    text-align: center;
+}
+
+/* Middle 캐릭터 말풍선, 캐릭터 */
+.chat_bubbles {
+    position: relative;
+	background: #9ee9f0;
+    border-radius: .4em;
+    height: 5.0vh;
+    border-color: #009bfc;
+    border-width: 2px;
+    border-style: solid;
+    font-size: 4.5vw;
+    
+    width: 15vw;
+    text-align: center;
+}
+.chat_bubbles:after {
+	content: '';
+	position: absolute;
+    bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 0.5em solid transparent;
+	border-top-color: #78c7ce;
+	border-bottom: 0;
+	border-left: 0;
+	margin-left: 0.375em;
+	margin-bottom: -0.5em;
+}
+#d_char {
+    padding-top: 1.2em;
+}
+
+/* Bottom 입력, 버튼  */
+#d_input {
+    padding-top: 3vh;
+    align-items: center;
+    text-align: center;
+    height: 50vh;
+}
+input {
+    margin-top: 2vh;
+    width: 40vw;
+    height: 5vh;
+    font-size: 3.5vh;
+    font-family: drfont_daraehand;
+}

@@ -2,66 +2,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/kkoongdda.css">
     <title>쿵쿵따</title>
-    <style>
-        div {
-            width:100%;
-            background-color:#ffdddd;
-            font-family: drfont_daraehand;
-        }
-        #top_title {
-            color:black;
-            font-weight:bold;
-            font-size:4.0vw;
-            align-self:flex-start;
-            vertical-align:80%;
-        }
-        #top_curWord {
-            margin-left: 25%;
-            margin-top: 2%;
-            padding: 10px;
-            width: 30%;
-
-            border-width: 2px;
-            border-style: groove;
-            border-color: coral;
-            display:inline-block;
-        }
-        #stretcher {
-            display: table;
-            width: 100%;
-        }
-        .stretchee {
-            display:table-cell;
-        }
-        .top_curWord_class {
-            color:#010101;
-            font-weight:bold;
-            font-size: 6.0vw;
-            text-align: center;
-        }
-        #char_p1 {
-            color:red;
-        }
-        .images {
-            width: 15vw;
-            height: 15vw;
-            object-fit: cover;
-            background-color:transparent;
-        }
-        #d_input {
-            padding-top: 3vh;
-            align-items: center;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
     <div id="d_top">
         <span id="top_title">&nbsp;쿵쿵따</span>
         <div id="top_curWord">
             <div id="stretcher">
-                <span class="top_curWord_class stretchee" id="top_curWord_1">다</span>
+                <span class="top_curWord_class stretchee" id="top_curWord_1">ㅡ</span>
                 <span class="top_curWord_class stretchee" id="top_curWord_2">ㅡ</span>
                 <span class="top_curWord_class stretchee" id="top_curWord_3">ㅡ</span>
             </div>
@@ -69,25 +18,26 @@
     </div>
     <div id="d_chat">
         <div id="stretcher">
-            <span class="stretchee" id="chat_p1">1</span>
-            <span class="stretchee" id="chat_p2">2</span>
-            <span class="stretchee" id="chat_p3">3</span>
-            <span class="stretchee" id="chat_p4">4</span>
+            <span class="stretchee player_1 chat_bubbles" id="chat_p1">1</span>
+            <span class="stretchee player_2 chat_bubbles" id="chat_p2">2</span>
+            <span class="stretchee player_3 chat_bubbles" id="chat_p3">3</span>
+            <span class="stretchee player_4 chat_bubbles" id="chat_p4">4</span>
         </div>
     </div>
     <div id="d_char">
         <div id="stretcher">
-            <span class="stretchee" id="char_p1"><img class="images" src="/res/luffy.png"></span>
-            <span class="stretchee" id="char_p2"><img class="images" src="/res/mario.png"></span>
-            <span class="stretchee" id="char_p3"><img class="images" src="/res/pika.png"></span>
-            <span class="stretchee" id="char_p4"><img class="images" src="/res/sonic.png"></span>
+            <span class="stretchee players player_1" id="char_p1"><img class="images" src="/res/luffy.png"></span>
+            <span class="stretchee players player_2" id="char_p2"><img class="images" src="/res/mario.png"></span>
+            <span class="stretchee players player_3" id="char_p3"><img class="images" src="/res/pika.png"></span>
+            <span class="stretchee players player_4" id="char_p4"><img class="images" src="/res/sonic.png"></span>
         </div>
     </div>
     <div id="d_input">
-        <input type="text">
-        <button class="btn">입력</button>
+        <input type="text" placeholder="단어를 입력하세요">
+        <!-- <button class="btn">입력</button> -->
     </div>
 
+    <!-- 이미지 배경 제거용 마스크 -->
     <svg width="0" height="0" viewBox="0 0 400 300">
         <defs>
             <mask id="mask">
@@ -97,8 +47,129 @@
     </svg>
       
     <script>
-        var $curWord = document.querySelector('#top_curWord');
+        let   $topWord = document.querySelector('#top_curWord_1');
+        const $input = document.querySelector('#d_input input');
+        const $button = document.querySelector('#d_input button');
+        const $$images = document.querySelectorAll('.images');
+        const $$chat = document.querySelectorAll('.chat_bubbles');
+        const $$players = document.querySelectorAll('.players');
+        let curTurn = 1;
+        let curWord, newWord, playerCnt;
+        // 한글검사용 정규표현식
+        const korean = /[가-힣]/;
+        
+        let asd = 'asdf';
+        
+        function checkKorean(str) {
+            for(let i=0; i< str.length; ++i) {
+                if( !korean.test(str[i]) )
+                    return false;
+            }
+            return true;
+        }
+        function prevTrun() {
+            return curTurn == 1 ? playerCnt: curTurn-1;
+        }
+        function nextTurn() {
+            return curTurn+1 > playerCnt ? 1: curTurn+1;
+        }
+        function TurnProcess() {
+            // 메인 첫단어 바꿔주고
+            $topWord.innerHTML = curWord[curWord.length-1];
 
+            // 이전턴 플레이어 말풍선 청소해주고
+            $$chat[prevTrun()-1].textContent = '';
+
+            // 현재 플레이어의 말풍선 업뎃해주고
+            $$chat[curTurn-1].textContent = curWord;
+            $$images[curTurn-1].style.border = 'none';
+
+            // 다음턴 플레이어의 말풍선에 쩜쩜쩜, 테두리 강조
+            $$chat[nextTurn()-1].textContent = '. . .';
+            $$images[nextTurn()-1].style.border = 'outset';
+
+            // 턴카운트 올려주고
+            curTurn = nextTurn();
+
+            return curTurn;
+        }
+        const onClickButton = () => {
+            // curWord = $input.value;
+            // console.log(TurnProcess());
+            // $input.value = '';
+
+            // 세글자
+            if( $input.value.length != 3 ) {
+                $input.placeholder = '세글자!'
+            } 
+            // 한국어
+            else if( !checkKorean($input.value) ) {
+                $input.placeholder = '한국어!'
+            }
+            // 처음일때랑 정답일때랑 합쳐
+            // else if ( !curWord ) {
+            //     curWord = $input.value;
+            //     $topWord.innerHTML = curWord[2];
+            //     TurnProcess();
+            //     $input.placeholder = '단어를 입력하세요'
+            // } 
+            // 정답! or 처음
+            else if ( !curWord || $input.value[0] === $topWord.innerHTML[0] ) {
+                console.log(`Player ${curTurn}, ${$input.value}`);
+                curWord = $input.value;
+                $topWord.innerHTML = curWord[2];
+                TurnProcess();
+                $input.placeholder = '단어를 입력하세요'
+            } 
+            // 틀렸다
+            else {
+                $input.placeholder = '??!!'
+            };
+            $input.value = '';
+        };
+
+        while(true) {
+            playerCnt = parseInt(prompt('몇 명[2-4]?'));
+            if( !playerCnt ) {
+                alert('숫자. 입력');
+            }
+            else if( playerCnt >= 2 && playerCnt <= 4 ) {
+                break;
+            }
+            else
+                alert('2에서 4');
+        }
+
+        console.log('시작' + playerCnt);
+        for(let i=4;i>playerCnt;i--) {
+            $$players[i-1].style.display = 'none';
+            $$chat[i-1].style.display = 'none';
+            console.log(`Player ${i} is not exist`);
+
+            /* * 테스트용 코드. player, chat 리스트 받아서 처리하는게 깔끔할듯
+             * https://uxgjs.tistory.com/195 값->변수
+             * var target = '.player_' + i;
+             *  console.log(target);
+             *  var aa = document.querySelectorAll('.player_' + i);
+             *  aa.forEach((cur, idx, list)=>{
+             *      cur.style.display = 'none';
+             *  });
+             *  console.log(i);
+             * 
+             *  visibility:hidden   // 칸을 빈칸으로
+             *  display: none;      // 아예 칸도 없애버림
+             **/
+        }
+        // First turn
+        $$chat[0].textContent = 'Starting...';
+        $$images[0].style.border = 'outset';
+        
+
+        // $button.addEventListener('click', onClickButton);
+        $input.addEventListener('keydown', (event)=> {
+            if( event.keyCode === 13 )   // Enter keycode
+                onClickButton();
+        });
     </script>
 </body>
 </html>
